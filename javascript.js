@@ -67,13 +67,13 @@ let game = () => {
     }
     if (playerWin == computerWin) {
         console.log(`End Result: Tied at player:${playerWin}wins computer:${computerWin}wins`)
-        result=(`End Result: Tied at player:${playerWin}wins computer:${computerWin}wins`)
+        result=(`End Result: Tied at player:${playerWin}wins computer:${computerWin}wins and ${tie} tie(s)`)
     } else if (playerWin > computerWin) {
         console.log(`End Result: Player wins at ${playerWin} vs ${computerWin}`)
-        result=(`End Result: Player wins at ${playerWin} vs ${computerWin}`)
+        result=(`End Result: Player wins at ${playerWin} vs ${computerWin} and ${tie} ties`)
     } else if (playerWin < computerWin) {
         console.log(`End Result: Computer wins at ${computerWin} vs ${playerWin}}`)
-        result=(`End Result: Computer wins at ${computerWin} vs ${playerWin}}`)
+        result=(`End Result: Computer wins with Score ${computerWin} vs ${playerWin} and ${tie} tie(s)`)
     }
     return document.getElementById('d1').textContent=result
 
