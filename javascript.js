@@ -4,7 +4,22 @@ let tie = 0;
 let createDiv =() =>{
     newDiv = document.createElement('div');
     newDiv.setAttribute("id", "d1");
-    document.getElementsByTagName('body')[0].appendChild(newDiv);
+    document.body.appendChild(newDiv);
+    
+
+    let image = document.createElement('img')
+    image.src = 'images/title.jpeg'
+    newDiv.appendChild(image)
+
+    let btnDiv = document.createElement('div')
+    btnDiv.setAttribute('class', 'btndiv')
+    newDiv.appendChild(btnDiv)
+
+    let playBtn = document.createElement('button')
+    playBtn.setAttribute('class', 'playbtn')
+    playBtn.textContent = 'PRESS TO PLAY'
+    btnDiv.appendChild(playBtn)
+
     
    
 } 

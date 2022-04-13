@@ -1,0 +1,21 @@
+#d1 {
+    display: flex;
+    justify-content: center;
+    margin:40px;
+    flex-direction: column;
+}
+
+.btndiv {
+    margin: 30px;
+    justify-content: center;
+    align-items: center;
+    display:flex;
+    
+}
+
+.playbtn {
+    display:flex;
+    justify-content: center;
+    align-content: center;
+    padding:20px;
+}
