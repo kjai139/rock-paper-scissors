@@ -1,28 +1,33 @@
 let playerWin = 0;
 let computerWin = 0;
 let tie = 0;
-let createDiv =() =>{
-    newDiv = document.createElement('div');
-    newDiv.setAttribute("id", "d1");
-    document.body.appendChild(newDiv);
+
+newDiv = document.createElement('div');
+newDiv.setAttribute("id", "d1");
+document.body.appendChild(newDiv);
     
 
-    let image = document.createElement('img')
-    image.src = 'images/title.jpeg'
-    newDiv.appendChild(image)
+let image = document.createElement('img')
+image.src = 'images/title.jpg'
+image.setAttribute('class','titleimg')
+newDiv.appendChild(image)
 
-    let btnDiv = document.createElement('div')
-    btnDiv.setAttribute('class', 'btndiv')
-    newDiv.appendChild(btnDiv)
+let btnDiv = document.createElement('div')
+btnDiv.setAttribute('class', 'btndiv')
+newDiv.appendChild(btnDiv)
 
-    let playBtn = document.createElement('button')
-    playBtn.setAttribute('class', 'playbtn')
-    playBtn.textContent = 'PRESS TO PLAY'
-    btnDiv.appendChild(playBtn)
+let playBtn = document.createElement('button')
+playBtn.setAttribute('class', 'playbtn')
+playBtn.textContent = 'PRESS TO PLAY'
+btnDiv.appendChild(playBtn)
+
+    
 
     
    
-} 
+
+
+
 
 
 
@@ -41,10 +46,46 @@ let computerPlay = () => {
 }
 
 let playSingleRound = (playerSelection, computerSelection) => {
-    cS = computerPlay()
-    pS = prompt('Please enter Rock, Paper, or Scissor')
-    playerSelection = pS.toLowerCase()
-    computerSelection = cS
+    btnDiv.removeChild(playBtn)
+
+    let startTextBox = document.createElement('div')
+    startTextBox.classList.add('startTxtbox')
+    newDiv.insertBefore(startTextBox, btnDiv)
+
+    let startText = document.createElement('span')
+    startText.textContent = 'BEST OF 5, CHOOSE YOUR WEAPON!'
+    startTextBox.appendChild(startText)
+
+    btn1 = document.createElement('button')
+    btn1.classList.add('rockbtn1')
+    btn1.classList.add('buttons')
+    btnDiv.appendChild(btn1)
+    
+    btn2 = document.createElement('button')
+    btn2.classList.add('paperbtn1')
+    btn2.classList.add('buttons')
+    btnDiv.appendChild(btn2)
+
+
+    btn3 = document.createElement('button')
+    btn3.classList.add('scissorbtn1')
+    btn3.classList.add('buttons')
+    btnDiv.appendChild(btn3)
+
+    btn1.addEventListener('click', () => {
+        btn1.classList.add('clicked')
+        playerSelection = 'rock'
+        computerSelection = computerPlay()
+        console.log(playerSelection, computerSelection)
+        btn1.addEventListener('transitionend', () => {
+            btn1.classList.remove('clicked')
+            
+        } )
+    })
+
+
+
+
     let br = document.createElement('br')
     
 
@@ -122,7 +163,9 @@ let game = () => {
     return document.getElementById('d1').textContent=result
 
 }
-createDiv()
-game()
 
 
+
+
+let playB = document.querySelector('.playbtn')
+playB.addEventListener('click', playSingleRound)

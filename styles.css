@@ -19,3 +19,56 @@
     align-content: center;
     padding:20px;
 }
+
+.titleimg {
+    width: 400px;
+    height: 400px;
+    justify-content: center;
+    align-self: center;
+}
+
+.rockbtn1 {
+    height: 100px;
+    width: 100px;
+    background-image: url(images/rock.jpeg);
+    background-size: cover;
+    border: 0;
+    
+    
+}
+
+.paperbtn1 {
+    height: 100px;
+    width: 100px;
+    background-image: url(images/paper.jpeg);
+    background-size: cover;
+    border: 0;
+    margin: 10px;
+}
+
+.scissorbtn1 {
+    height: 100px;
+    width: 100px;
+    background-image: url(images/scissor.jpeg);
+    background-size: cover;
+    border: 0;
+}
+
+
+.clicked {
+    transform: scale(1.1);
+    border-color: red;
+    box-shadow: 0 0 1rem red;
+  }
+
+
+.buttons {
+    transition: all 1s ease;
+    border-radius: 60%;
+}
+
+.startTxtbox {
+    display: flex;
+    justify-content: center;
+    font-family: sans-serif;
+}
