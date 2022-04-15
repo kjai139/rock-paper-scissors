@@ -8,7 +8,6 @@
 .btndiv {
     margin: 30px;
     justify-content: center;
-    align-items: center;
     display:flex;
     
 }
@@ -35,6 +34,7 @@
     border: 0;
     
     
+    
 }
 
 .paperbtn1 {
@@ -43,7 +43,7 @@
     background-image: url(images/paper.jpeg);
     background-size: cover;
     border: 0;
-    margin: 10px;
+    
 }
 
 .scissorbtn1 {
@@ -55,11 +55,23 @@
 }
 
 
-.clicked {
+.rockclicked {
     transform: scale(1.1);
     border-color: red;
     box-shadow: 0 0 1rem red;
   }
+
+.paperclicked {
+    transform: scale(1.1);
+    border-color: yellow;
+    box-shadow: 0 0 1rem yellow;
+}
+
+.scissorclicked {
+    transform: scale(1.1);
+    border-color: lightblue;
+    box-shadow: 0 0 1rem lightblue;
+}
 
 
 .buttons {
@@ -70,5 +82,53 @@
 .startTxtbox {
     display: flex;
     justify-content: center;
-    font-family: sans-serif;
+    font-family: 'Poppins', sans-serif;
+    font-weight: bold;
+    margin-top: 20px;
+}
+
+.resultDiv {
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    width: 140px;
+    height:160px;
+    font-family: 'Poppins', sans-serif;
+    
+   
+}
+
+.outerbtndiv {
+    display:flex;
+    justify-content: space-between;
+    
+
+}
+
+
+.resultCpuDiv {
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    width: 140px;
+    height:160px;
+    font-family: 'Poppins', sans-serif;
+}
+
+.roundResultBox {
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.endResultSpan {
+    font-family: 'Poppins', sans-serif;
+}
+
+.scorekeepertxt {
+    font-family: 'Poppins', sans-serif;
+    font-weight: bold;
+
 }
