@@ -30,14 +30,47 @@ playBtn.setAttribute('class', 'playbtn')
 playBtn.textContent = 'PRESS TO PLAY'
 btnDiv.appendChild(playBtn)
 
+let startTextBox = document.createElement('div')
+startTextBox.classList.add('startTxtbox')
+newDiv.insertBefore(startTextBox, outerBtnDiv)
 
+let startText = document.createElement('span')
+startTextBox.appendChild(startText)
 
+let resultDiv = document.createElement('div')
+resultDiv.setAttribute('class', 'resultDiv')
+outerBtnDiv.insertBefore(resultDiv, btnDiv)
 
-    
+let resultCpuDiv = document.createElement('div')
+resultCpuDiv.setAttribute('class','resultCpuDiv')
+outerBtnDiv.appendChild(resultCpuDiv)
+
+let resultPlayerText = document.createElement('span')
+resultPlayerText.setAttribute('class','resultPlayerText')
+resultDiv.appendChild(resultPlayerText)
+
+let resultCpuText = document.createElement('span')
+resultCpuText.setAttribute('class', 'resultCpuText')
+resultCpuDiv.appendChild(resultCpuText)
+
+let RoundResultBox = document.createElement('div')
+RoundResultBox.setAttribute('class', 'roundResultBox')
+newDiv.appendChild(RoundResultBox)
+outerBtnDiv.style.justifyContent = 'space-between'
+
+let EndResultSpan = document.createElement('span')
+EndResultSpan.setAttribute('class', 'endResultSpan')  
+RoundResultBox.appendChild(EndResultSpan)
+
+let scoreKeeperTxt = document.createElement('span')
+scoreKeeperTxt.setAttribute('class', 'scorekeepertxt')
+RoundResultBox.appendChild(scoreKeeperTxt)
    
 
 
-
+let nextMatchBox = document.createElement('div')
+nextMatchBox.setAttribute('class', 'nextMatchBox')
+newDiv.insertBefore(nextMatchBox, RoundResultBox )
 
 
 
@@ -61,16 +94,15 @@ let playSingleRound = (playerSelection, computerSelection) => {
     roundNumber = 1
     playerWin = 0
     computerWin = 0
+    tie = 0
+    if (newQueue == true){
+        let removeMsg = document.querySelector('.endMsg')
+        startTextBox.removeChild(removeMsg)
+        
+    }
     
-
-
-    let startTextBox = document.createElement('div')
-    startTextBox.classList.add('startTxtbox')
-    newDiv.insertBefore(startTextBox, outerBtnDiv)
-
-    let startText = document.createElement('span')
-    startText.textContent = `Round ${roundNumber}! Make your choice!`
-    startTextBox.appendChild(startText)
+    startText.textContent = `Round ${roundNumber}/5! Make your choice!`
+    
 
     btn1 = document.createElement('button')
     btn1.setAttribute('id', 'rock')
@@ -96,43 +128,14 @@ let playSingleRound = (playerSelection, computerSelection) => {
     BtnArrays = Array.from(allButtons)
     console.log(BtnArrays)
 
-    let resultDiv = document.createElement('div')
-    resultDiv.setAttribute('class', 'resultDiv')
-    outerBtnDiv.insertBefore(resultDiv, btnDiv)
 
-    let resultCpuDiv = document.createElement('div')
-    resultCpuDiv.setAttribute('class','resultCpuDiv')
-    outerBtnDiv.appendChild(resultCpuDiv)
 
-    let resultPlayerText = document.createElement('span')
-    resultPlayerText.setAttribute('class','resultPlayerText')
-    resultDiv.appendChild(resultPlayerText)
-
-    let resultCpuText = document.createElement('span')
-    resultCpuText.setAttribute('class', 'resultCpuText')
-    resultCpuDiv.appendChild(resultCpuText)
-
-    let RoundResultBox = document.createElement('div')
-    RoundResultBox.setAttribute('class', 'roundResultBox')
-    newDiv.appendChild(RoundResultBox)
-    outerBtnDiv.style.justifyContent = 'space-between'
-
-    let EndResultSpan = document.createElement('span')
-    EndResultSpan.setAttribute('class', 'endResultSpan')  
-    RoundResultBox.appendChild(EndResultSpan)
-
-    let scoreKeeperTxt = document.createElement('span')
-    scoreKeeperTxt.setAttribute('class', 'scorekeepertxt')
-    RoundResultBox.appendChild(scoreKeeperTxt)
-
-    let nextMatchBox = document.createElement('div')
-    nextMatchBox.setAttribute('class', 'nextMatchBox')
-    newDiv.insertBefore(nextMatchBox, RoundResultBox )
 
     let nextMatchbtn = document.createElement('button')
     nextMatchbtn.setAttribute('class','nextMatchbtn')
 
     let endMsg = document.createElement('h1')
+    endMsg.setAttribute('class', 'endMsg')
 
 
     let newGameButton = document.createElement('button')
@@ -144,22 +147,29 @@ let playSingleRound = (playerSelection, computerSelection) => {
         element.addEventListener('click', () => {
             element.classList.add(`${element.id}clicked`)
             console.log(element.id)
+            choiceMade = true;
             btnDiv.classList.add('unclickable')
             playerSelection = element.id
             computerSelection = computerPlay()
             console.log(playerSelection, computerSelection)
             element.addEventListener('transitionend', () => {
                 element.classList.remove(`${element.id}clicked`)
+                if (roundNumber <= 5 && choiceMade == true){
+                    startText.textContent = 'Press the \'Next Round\' button'
+                }
+                else if (roundNumber > 5) {
+                    startText.textContent = 'Press the \'End Result\' button'
+                }
             })
             
 
-            resultPlayerText.textContent = `Player used ${element.id}!`
+            resultPlayerText.textContent = `You used ${element.id}!`
             resultCpuText.textContent = `CPU used ${computerSelection}!`
         
 
 
             if (playerSelection == computerSelection) {
-                EndResultSpan.textContent = `Tie! Both used ${playerSelection}`
+                EndResultSpan.textContent = `Tie! Both players used ${playerSelection}`
                 tie+=1
 
             } else if (playerSelection == 'rock' && computerSelection == 'paper') {
@@ -172,7 +182,7 @@ let playSingleRound = (playerSelection, computerSelection) => {
                 EndResultSpan.textContent =`You lose! Rock beats scissor!`
                 computerWin+=1
             } else if (playerSelection =='scissor' && computerSelection =='paper') {
-                EndResultSpan.textContent =`You win! Scissor beats paper`
+                EndResultSpan.textContent =`You win! Scissor beats paper!`
                 playerWin+=1
             } else if (playerSelection =='paper' && computerSelection =='rock') {
                 EndResultSpan.textContent =`You win! Paper beats rock!`
@@ -181,7 +191,7 @@ let playSingleRound = (playerSelection, computerSelection) => {
                 EndResultSpan.textContent =`You lose! Scissor beats paper!`
                 computerWin+=1
             }
-            scoreKeeperTxt.textContent = `Player:${playerWin} wins || Computer:${computerWin} wins || Ties: ${tie}`
+            scoreKeeperTxt.textContent = `SCOREBOARD - YOU:${playerWin} || CPU:${computerWin} || Ties: ${tie}`
         
             if (roundNumber <= 5) {
                 nextMatchBox.appendChild(nextMatchbtn)
@@ -196,6 +206,7 @@ let playSingleRound = (playerSelection, computerSelection) => {
 
 
              nextMatchbtn.addEventListener('click', () => {
+                    choiceMade = false
                     if (roundNumber == 6 || roundNumber > 5 ){
                         scoreKeeperTxt.textContent = ''
                         resultPlayerText.textContent = ''
@@ -205,18 +216,18 @@ let playSingleRound = (playerSelection, computerSelection) => {
                         btnDiv.textContent = ''
                         if (playerWin > computerWin){
                             
-                            endMsg.textContent = `YOU WIN!${playerWin}WINS VS ${computerWin}LOSSES`
+                            endMsg.textContent = `YOU WIN!${playerWin}WIN(S) VS ${computerWin}LOSS(ES) WITH ${tie} TIE(S)`
                             
                         } else if (computerWin > playerWin){
                             
-                            endMsg.textContent = `YOU LOSE!${playerWin}WINS VS ${computerWin}LOSSES`
+                            endMsg.textContent = `YOU LOSE!${playerWin}WIN(S) VS ${computerWin}LOSS(ES) WITH ${tie} TIE(S)`
                             
                         } else if (playerWin == computerWin) {
                             
-                            endMsg.textContent = `DRAW!${playerWin}WINS VS ${computerWin}LOSSES AND ${tie}TIES`
+                            endMsg.textContent = `DRAW!${playerWin}WIN(S) VS ${computerWin}LOSS(ES) AND ${tie}TIE(S)`
                             
                         }
-                        btnDiv.appendChild(endMsg)
+                        startTextBox.appendChild(endMsg)
                         newQueue = true
                         if (newQueue == true) {
                             nextMatchBox.textContent = ''
@@ -233,7 +244,7 @@ let playSingleRound = (playerSelection, computerSelection) => {
                         resultPlayerText.textContent = ''
                         resultCpuText.textContent = ''
                         EndResultSpan.textContent = ''
-                        startText.textContent = `Round ${roundNumber}! Make your choice!`
+                        startText.textContent = `Round ${roundNumber}/5! Make your choice!`
 
                     } 
 
@@ -258,31 +269,7 @@ let playSingleRound = (playerSelection, computerSelection) => {
 
 }
 
-let game = () => {
-    playerWin=0
-    computerWin=0
-    tie=0
-    let br = document.createElement('br')
-    let mh = document.createTextNode('=== Match History ===')
-    document.body.appendChild(br)
-    document.body.appendChild(mh)
 
-    for (let rounds = 1;rounds <=5;rounds++){
-        playSingleRound()
-    }
-    if (playerWin == computerWin) {
-        console.log(`End Result: Tied at player:${playerWin}wins computer:${computerWin}wins`)
-        result=(`End Result: Tied at player:${playerWin} wins computer:${computerWin}wins and ${tie} tie(s)`)
-    } else if (playerWin > computerWin) {
-        console.log(`End Result: Player wins at ${playerWin} vs ${computerWin}`)
-        result=(`End Result: Player wins at ${playerWin} vs ${computerWin} and ${tie} ties`)
-    } else if (playerWin < computerWin) {
-        console.log(`End Result: Computer wins at ${computerWin} vs ${playerWin}}`)
-        result=(`End Result: Computer wins with Score ${computerWin} vs ${playerWin} and ${tie} tie(s)`)
-    }
-    return document.getElementById('d1').textContent=result
-
-}
 
 
 
